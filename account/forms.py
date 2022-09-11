@@ -79,3 +79,21 @@ class ChangePasswordForm(PasswordChangeForm):
                 'class': 'form-control',
                 'placeholder': 'Confirm Your New Password'
             }))
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = user
+        fields = ['first_name', 'last_name', 'username', 'email', 'image', 'bio']
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control',
+                                                'placeholder': "Your First Name"}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control',
+                                                'placeholder': "Your Last Name"}),
+            'email': forms.EmailInput(attrs={'class': 'form-control',
+                                            'placeholder': "Your Email Address"}),
+            'username': forms.TextInput(attrs={'class': 'form-control',
+                                                'placeholder': "Your Username"}),
+            'bio': forms.Textarea(attrs={'class': 'form-control',
+                                        'placeholder': "Your bio"}),                                   
+        }

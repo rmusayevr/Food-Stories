@@ -1,7 +1,6 @@
-from email import message
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.views import (PasswordChangeView, 
                                         PasswordResetView, 
                                         PasswordResetConfirmView, 
@@ -14,12 +13,13 @@ from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_decode
 from .tokens import account_activation_token
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm, ResetPasswordForm, CustomSetPasswordForm, ChangePasswordForm
+from .forms import RegisterForm, LoginForm, ResetPasswordForm, CustomSetPasswordForm, ChangePasswordForm, EditProfileForm
 from .models import user
 from Food_Stories.settings import EMAIL_HOST_USER
 from django.contrib.messages.views import SuccessMessageMixin
-
-
+from django.contrib.auth import get_user_model
+user_model = get_user_model()
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class RegisterView(CreateView):
     template_name = 'register.html'
@@ -70,7 +70,6 @@ def activate(request, uidb64, token):
 class LogInView(LoginView):
     template_name = 'login.html'
     form_class = LoginForm
-    # authentication_form = LoginForm
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -110,9 +109,22 @@ class ChangePasswordView(PasswordChangeView):
         messages.success(self.request, 'Your password has been successfully changed')
         return super(ChangePasswordView, self).get_success_url()
 
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    template_name = 'edit_profile.html'
+    model = user_model
+    form_class = EditProfileForm
+    
+    def get_object(self, *args, **kwargs):
+        return self.request.user
 
-def profile(request):
-    return render(request, 'user-profile.html')
+    
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    template_name = 'user_profile.html'
+    model = user_model
+    
+    def get_object(self, *args, **kwargs):
+        return user_model.objects.filter(pk=self.kwargs.get('pk'))
 
 def change_password(request):
     return render(request, 'change_password.html')

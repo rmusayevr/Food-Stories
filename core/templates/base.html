@@ -39,6 +39,7 @@
                     <li class="nav-item"><a href="{% url 'recipes' %}" class="nav-link">Recipes</a></li>
                     <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
                     {% if user.is_authenticated %}
+                        <li class="nav-item"><a href="{% url 'profile' pk=user.pk %}" class="nav-link">Profile</a></li>
                         <li><a href="{% url 'logout' %}" class="btn btn-black px-3 px-md-4 py-3">Log Out</a></li>
                     {% else %}
                         <li><a href="{% url 'register' %}" class="btn btn-black px-3 px-md-4 py-3">Sign in</a></li>

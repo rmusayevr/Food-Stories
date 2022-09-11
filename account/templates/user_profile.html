@@ -10,16 +10,13 @@
                     <div class="user-profile-side-bar sidebar-wrap">
                         <div class="sidebar-box p-4 about text-center ftco-animate">
                             <h2 class="heading mb-4">About Me</h2>
-                            <img src="{% static 'images/author.jpg' %}" class="img-fluid" alt="Colorlib Template">
+                            <img src="{{ user.image.url }}" class="img-fluid" alt="Colorlib Template">
                             <div class="text pt-4">
-                                <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
-                                    a large language ocean.</p>
+                                <p>{{ user.bio }}</p>
                             </div>
                         </div>
                         <div class="sidebar-box ftco-animate user-profile">
-
-                            <a href="single.html" class="btn btn-hover-color py-2">Edit Profile</a>
-
+                            <a href="{% url 'edit' pk=user.pk%}" class="btn btn-hover-color py-2">Edit Profile</a>
                         </div>
                         <div class="sidebar-box ftco-animate user-profile">
                             <a href="single.html" class="btn btn-hover-color py-2">Create story </a>

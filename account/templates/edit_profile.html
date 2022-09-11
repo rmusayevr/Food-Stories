@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %} Edit Profile {% endblock %}
+
+{% block content %}
+    <section class="ftco-section contact-section register">
+            <div class="container">
+                <div class="row block-9 justify-content-center">
+                    <div class="col-md-6 order-md-last d-flex">
+                        <form method="POST" enctype="multipart/form-data" class="bg-light p-5 contact-form">
+                            {% csrf_token %}
+                            <p class="navbar-brand center">Edit Profile<span>.</span></p>
+                            <div class="form-group">
+                                {{ form.first_name }}
+                                {% for error in form.first_name.errors %}
+                                    <span class="alert-danger">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.last_name }}
+                                {% for error in form.last_name.errors %}
+                                    <span class="alert-danger">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.username }}
+                                {% for error in form.username.errors %}
+                                    <span class="alert-danger">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
+                                {% for error in form.email.errors %}
+                                    <span class="alert-danger">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.image }}
+                                {% for error in form.image.errors %}
+                                    <span class="alert-danger">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.bio }}
+                                {% for error in form.bio.errors %}
+                                    <span class="alert-danger">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Update" class="btn btn-primary py-3 px-5">
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock %}
