@@ -49,9 +49,8 @@ class RegisterView(CreateView):
             from_email = EMAIL_HOST_USER
             to_email = request.POST['email']
             send_mail(subject, message, from_email, [to_email, ])
-            messages.success(self.request, 'We sent Confirmation Email !')
-
             return redirect('login')
+        messages.success(self.request, 'We sent Confirmation Email !')
         return render(request, self.template_name, {'form': form})
 
 def activate(request, uidb64, token):
@@ -116,8 +115,6 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
     
     def get_object(self, *args, **kwargs):
         return self.request.user
-
-    
 
 class UserProfileView(LoginRequiredMixin, DetailView):
     template_name = 'user_profile.html'

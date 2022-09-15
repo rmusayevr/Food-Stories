@@ -8,54 +8,36 @@
                     <div class="col-md-6 order-md-last d-flex">
                         <form method="POST" enctype="multipart/form-data" class="bg-light p-5 contact-form">
                             {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <div id="form_errors">
+                                        {% for key, value in form.errors.items %}
+                                            <strong>{{ value }}</strong>
+                                        {% endfor %}
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
                             <p class="navbar-brand center">Edit Profile<span>.</span></p>
                             <div class="form-group">
                                 {{ form.first_name }}
-                                {% for error in form.first_name.errors %}
-                                    <span class="alert-danger">
-                                        {{ error }}
-                                    </span>
-                                {% endfor %}
                             </div>
                             <div class="form-group">
                                 {{ form.last_name }}
-                                {% for error in form.last_name.errors %}
-                                    <span class="alert-danger">
-                                        {{ error }}
-                                    </span>
-                                {% endfor %}
                             </div>
                             <div class="form-group">
                                 {{ form.username }}
-                                {% for error in form.username.errors %}
-                                    <span class="alert-danger">
-                                        {{ error }}
-                                    </span>
-                                {% endfor %}
                             </div>
                             <div class="form-group">
                                 {{ form.email }}
-                                {% for error in form.email.errors %}
-                                    <span class="alert-danger">
-                                        {{ error }}
-                                    </span>
-                                {% endfor %}
                             </div>
                             <div class="form-group">
                                 {{ form.image }}
-                                {% for error in form.image.errors %}
-                                    <span class="alert-danger">
-                                        {{ error }}
-                                    </span>
-                                {% endfor %}
                             </div>
                             <div class="form-group">
                                 {{ form.bio }}
-                                {% for error in form.bio.errors %}
-                                    <span class="alert-danger">
-                                        {{ error }}
-                                    </span>
-                                {% endfor %}
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Update" class="btn btn-primary py-3 px-5">
