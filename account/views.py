@@ -50,7 +50,7 @@ class RegisterView(CreateView):
             to_email = request.POST['email']
             send_mail(subject, message, from_email, [to_email, ])
             return redirect('login')
-        messages.success(self.request, 'We sent Confirmation Email !')
+        messages.success(self.request, 'We sent Confirmation Email!')
         return render(request, self.template_name, {'form': form})
 
 def activate(request, uidb64, token):
@@ -58,12 +58,12 @@ def activate(request, uidb64, token):
     User = user.objects.filter(pk=uid, is_active=False).first()
 
     if User is not None and account_activation_token.check_token(User, token):
-        messages.success(request, 'Your profile is activated')
+        messages.success(request, 'Your profile is activated!')
         User.is_active = True
         User.save()
         return redirect('login')
     else:
-        messages.error(request, 'Your session is expired')
+        messages.error(request, 'Your session is expired!')
         return redirect('/')
 
 class LogInView(LoginView):
@@ -96,7 +96,7 @@ class ResetPasswordConfirmView(PasswordResetConfirmView):
     success_url = reverse_lazy('reset_password_complete')
 
     def get_success_url(self):
-        messages.success(self.request, 'Your password has been successfully changed')
+        messages.success(self.request, 'Your password has been successfully changed!')
         return super(ResetPasswordConfirmView, self).get_success_url()
 
 class ChangePasswordView(PasswordChangeView):
@@ -105,7 +105,7 @@ class ChangePasswordView(PasswordChangeView):
     success_url = reverse_lazy('home')
 
     def get_success_url(self):
-        messages.success(self.request, 'Your password has been successfully changed')
+        messages.success(self.request, 'Your password has been successfully changed!')
         return super(ChangePasswordView, self).get_success_url()
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
@@ -122,12 +122,3 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     
     def get_object(self, *args, **kwargs):
         return user_model.objects.filter(pk=self.kwargs.get('pk'))
-
-def change_password(request):
-    return render(request, 'change_password.html')
-    
-def reset_password(request):
-    return render(request, 'reset_password.html')
-    
-def forget_password(request):
-    return render(request, 'forget_password.html')

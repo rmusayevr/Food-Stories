@@ -19,10 +19,10 @@
                             <a href="{% url 'edit' pk=user.pk%}" class="btn btn-hover-color py-2">Edit Profile</a>
                         </div>
                         <div class="sidebar-box ftco-animate user-profile">
-                            <a href="single.html" class="btn btn-hover-color py-2">Create story </a>
+                            <a href="{% url 'create_story'%}" class="btn btn-hover-color py-2">Create story </a>
                         </div>
                         <div class="sidebar-box ftco-animate user-profile">
-                            <a href="single.html" class="btn btn-hover-color py-2">Create recipe </a>
+                            <a href="{% url 'create_recipe'%}" class="btn btn-hover-color py-2">Create recipe </a>
                         </div>
                         <div class="sidebar-box p-4 ftco-animate">
                             <form action="#" class="search-form">

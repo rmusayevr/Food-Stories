@@ -16,5 +16,5 @@ class ContactView(CreateView):
     success_url = reverse_lazy('contact')
 
     def get_success_url(self):
-        messages.success(self.request, 'Your message has been successfully sent')
+        messages.success(self.request, 'Your message has been successfully sent!')
         return super(ContactView, self).get_success_url()
